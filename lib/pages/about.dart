@@ -9,8 +9,23 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
+
+  Future<void>? _launched;
+
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    final Uri toLaunch = Uri(scheme: 'https', host: 'github.com', path: 'christopherlam888/geography-game');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("About"),
@@ -66,7 +81,9 @@ class _AboutState extends State<About> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () => setState(() {
+                        _launched = _launchInBrowser(toLaunch);
+                      }),
                       child: const Text(
                         "Github",
                         style: TextStyle(
