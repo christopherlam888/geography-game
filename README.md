@@ -1,6 +1,6 @@
 # geography_game
 
-A simple geography game.
+A simple game to test your knowledge of geography. Name countries, capitals, and continents.
 
 ## Getting Started
 

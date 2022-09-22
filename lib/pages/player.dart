@@ -8,6 +8,13 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
+
+  bool playerOne = true;
+  List<String> playerOneMoves = [];
+  List<String> playerTwoMoves = [];
+  int playerOneTurn = 0;
+  int playerTwoTurn = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +22,17 @@ class _PlayerState extends State<Player> {
         title: const Text("Player"),
       ),
       body: Container(
-        child: const Text("Player"),
+        child: Column(
+          children: [
+            const Text("Player"),
+            const Text("Turn: "),
+            TextField(),
+            TextButton(
+                onPressed: () {},
+                child: const Text("Go!")
+            ),
+          ],
+        ),
       ),
     );
   }

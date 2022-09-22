@@ -8,6 +8,11 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+
+  bool countries = true;
+  bool capitals = true;
+  bool continents = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

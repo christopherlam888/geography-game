@@ -13,7 +13,7 @@ class _WelcomeState extends State<Welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Welcome"),
+        title: const Text("Geography Game"),
       ),
       drawer: NavBar(),
       body: Container(
@@ -22,7 +22,7 @@ class _WelcomeState extends State<Welcome> {
             const Text("Welcome"),
             TextButton(
                 onPressed: () {Navigator.pushNamed(context, '/player');},
-                child: Text("Start Game")
+                child: const Text("Start Game")
             ),
           ],
         ),
