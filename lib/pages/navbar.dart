@@ -6,21 +6,37 @@ class NavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.orange[200],
       child: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.book),
-            title: Text("Rules"),
+            leading: const Icon(Icons.book, color: Colors.black),
+            title: const Text(
+              "Rules",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
             onTap: () {Navigator.pushNamed(context, '/rules');},
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("Settings"),
+            leading: const Icon(Icons.settings, color: Colors.black),
+            title: const Text(
+              "Settings",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
             onTap: () {Navigator.pushNamed(context, '/settings');},
           ),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text("About"),
+            leading: const Icon(Icons.info, color: Colors.black),
+            title: const Text(
+              "About",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
             onTap: () {Navigator.pushNamed(context, '/about');},
           ),
         ],
