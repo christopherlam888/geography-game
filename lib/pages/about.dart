@@ -28,9 +28,11 @@ class _AboutState extends State<About> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.orange[900],
         title: const Text("About"),
       ),
       body: Container(
+        color: Colors.orange[200],
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListView(
@@ -87,6 +89,7 @@ class _AboutState extends State<About> {
                       child: const Text(
                         "Github",
                         style: TextStyle(
+                          color: Colors.black,
                           fontSize: 18.0,
                         ),
                       ),
