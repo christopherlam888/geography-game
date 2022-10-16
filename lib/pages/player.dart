@@ -7,12 +7,25 @@ class Player extends StatefulWidget {
   State<Player> createState() => _PlayerState();
 }
 
+
 class _PlayerState extends State<Player> {
+
   bool playerOne = true;
-  List<String> playerOneMoves = [];
-  List<String> playerTwoMoves = [];
-  int playerOneTurn = 0;
-  int playerTwoTurn = 0;
+  List<String> playerMoves = [];
+
+  int turnCount = 0;
+  int slotCount = 0;
+
+  final _firstController = ScrollController();
+  final name_getter = TextEditingController();
+  @override
+  void clear(){
+    name_getter.clear();
+  }
+  void dispose(){
+    name_getter.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +60,29 @@ class _PlayerState extends State<Player> {
 
                 SizedBox(
                   width: 240,
-                  child: TextField(),
+                  child: TextField(
+                    controller: name_getter,
+                  ),
                 ),
 
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (playerOne) {
+                            playerMoves.add(name_getter.text.toString());
+                            turnCount++;
+                            playerOne = false;
+                          }
+                          else {
+                            playerMoves.add(name_getter.text.toString());
+                            playerOne = true;
+                          }
+                          slotCount++;
+                          name_getter.clear();
+                        });
+                      },
                       child: const Text(
                         "Go!",
                         style: TextStyle(
@@ -66,12 +95,46 @@ class _PlayerState extends State<Player> {
                     ),
                   ),
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.only(top: 80.0),
+                  padding: const EdgeInsets.only(top: 80.0, bottom: 25.0),
                   child: Text(
                     "Moves Played:",
                     style: TextStyle(
                       fontSize: 25.0,
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 340,
+                  width: 180,
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: _firstController,
+                    radius: const Radius.circular(2.5),
+                    thickness: 5.0,
+                    child: CustomScrollView(
+                      slivers: <Widget> [
+                        SliverGrid(
+                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 90,
+                            mainAxisSpacing: 1.5,
+                            crossAxisSpacing: 1.5,
+                            childAspectRatio: 2.0
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                              (BuildContext context, int index) {
+                                return Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.orange[300],
+                                  child: Text(playerMoves[index]),
+                                );
+                              },
+                            childCount: slotCount,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
