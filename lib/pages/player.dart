@@ -9,23 +9,21 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-  List continents = ["Asia", "Europe", "North America", "Oceania", "Antarctica", "South America", "Africa"];
-  int player = 1;
+  List continents = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
   List<String> playerMoves = [];
-  String move = "";
-  String first_letter = "";
+  int player = 1;
   int turnCount = 1;
-  int slotCount = 0;
+  String errorMessage = "";
 
-  final _firstController = ScrollController();
-  final name_getter = TextEditingController();
+  final scrollController = ScrollController();
+  final nameGetter = TextEditingController();
 
   void clear(){
-    name_getter.clear();
+    nameGetter.clear();
   }
   @override
   void dispose(){
-    name_getter.dispose();
+    nameGetter.dispose();
     super.dispose();
   }
 
@@ -33,12 +31,12 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
 
     for (var i = 0; i < nameList1.length; i++) {
-      offNames.add(nameList1[i]["offName"]);
+      offNames.add(nameList1[i]["offName"].toString().toLowerCase());
     }
 
     for(var i = 0; i < nameList2.length; i++){
-      colNames.add(nameList2[i]["name"]);
-      capNames.add(nameList2[i]["capital"]);
+      colNames.add(nameList2[i]["name"].toString().toLowerCase());
+      capNames.add(nameList2[i]["capital"].toString().toLowerCase());
     }
 
     return Scaffold(
@@ -59,8 +57,10 @@ class _PlayerState extends State<Player> {
                       padding: const EdgeInsets.only(top: 20.0),
                       child: Text(
                         "Player $player",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 35.0,
+                          color: player.isOdd ? Colors.red[400] : Colors.blue[400],
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -77,7 +77,7 @@ class _PlayerState extends State<Player> {
                       child: SizedBox(
                         width: 240,
                         child: TextField(
-                          controller: name_getter,
+                          controller: nameGetter,
                           decoration: const InputDecoration(
                             hintText: "Enter a location",
                             focusedBorder: OutlineInputBorder(
@@ -94,30 +94,28 @@ class _PlayerState extends State<Player> {
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            move = name_getter.text.toString();
-                            move = move.substring(0,1).toUpperCase() + move.substring(1).toLowerCase();
-
-                            if (capNames.contains(move) || colNames.contains(move) || continents.contains(move) || offNames.contains(move)){
-                              first_letter = move.substring(0,1).toLowerCase();
-                                if ((player == 1) && (playerMoves.isEmpty || playerMoves[slotCount-1].endsWith(first_letter))) {
+                            String move = nameGetter.text.toString().trim().toLowerCase();
+                            if ((capNames.contains(move) || colNames.contains(move) || continents.contains(move) || offNames.contains(move)) && !playerMoves.contains(move)){
+                              String firstLetter = move.substring(0,1);
+                                if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
                                   playerMoves.add(move);
-                                  slotCount++;
                                   player = 2;
+                                  errorMessage = "";
                                 }
-                                else if (playerMoves[slotCount-1].endsWith(first_letter)){
+                                else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
                                   playerMoves.add(move);
                                   turnCount++;
-                                  slotCount++;
                                   player = 1;
+                                  errorMessage = "";
                                 }
                                 else {
-                                  print("wrong!");
+                                  errorMessage = "Try Again!";
                                 }
                             }
                             else{
-                              print("Wrong!");
+                              errorMessage = "Try Again!";
                             }
-                            name_getter.clear();
+                            nameGetter.clear();
                          });
                         },
                         style: ElevatedButton.styleFrom(
@@ -131,9 +129,17 @@ class _PlayerState extends State<Player> {
                           ),
                         ),
                     ),
+                    const SizedBox(height: 5.0),
+                    Text(
+                      errorMessage,
+                      style: const TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.red,
+                      ),
+                    ),
 
                     const Padding(
-                      padding: EdgeInsets.only(top: 50.0, bottom: 25.0),
+                      padding: EdgeInsets.only(top: 25.0, bottom: 25.0),
                       child: Text(
                         "Moves Played:",
                         style: TextStyle(
@@ -147,10 +153,11 @@ class _PlayerState extends State<Player> {
                       width: 180,
                       child: Scrollbar(
                         thumbVisibility: true,
-                        controller: _firstController,
+                        controller: scrollController,
                         radius: const Radius.circular(2.5),
                         thickness: 5.0,
                         child: CustomScrollView(
+                          controller: scrollController,
                           slivers: <Widget> [
                             SliverGrid(
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -163,11 +170,14 @@ class _PlayerState extends State<Player> {
                                   (BuildContext context, int index) {
                                     return Container(
                                       alignment: Alignment.center,
-                                      color: Colors.orange[300],
-                                      child: Text(playerMoves[index]),
+                                      color: index.isEven ? Colors.red[400] : Colors.blue[400],
+                                      child: Text(
+                                        playerMoves[index].split(" ").map((word) => word[0].toUpperCase() + word.substring(1)).join(" "),
+                                        textAlign: TextAlign.center,
+                                      ),
                                     );
                                   },
-                                childCount: slotCount,
+                                childCount: playerMoves.length,
                               ),
                             ),
                           ],

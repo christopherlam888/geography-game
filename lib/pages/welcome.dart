@@ -55,7 +55,7 @@ class _WelcomeState extends State<Welcome> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        'Welcome!',
+                        "Welcome!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -74,26 +74,24 @@ class _WelcomeState extends State<Welcome> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                        onPressed: () {
-                          readJson();
-
-                          Navigator.pushNamed(context, '/player');
-                          },
-
+                      onPressed: () {
+                        readJson();
+                        Navigator.pushNamed(context, '/player');
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.amber[900],
-                        side: BorderSide(color: Colors.deepOrange, width: 4),
+                        side: const BorderSide(color: Colors.deepOrange, width: 4),
                         elevation: 10,
                         shadowColor: Colors.amber,
                       ),
 
-                        child: const Text(
-                          "Start Game",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20.0,
-                          ),
+                      child: const Text(
+                        "Start Game",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20.0,
                         ),
+                      ),
                     ),
                   ],
                 ),
