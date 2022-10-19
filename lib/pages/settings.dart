@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+bool countries = true;
+bool capitals = true;
+bool continents = true;
+bool colloquial = true;
+bool abbrev = true;
+bool official = true;
+
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -9,15 +16,9 @@ class Settings extends StatefulWidget {
 
 enum gamemode {singleplayer, two_player}
 
-class _SettingsState extends State<Settings> {
-  bool countries = true;
-  bool capitals = true;
-  bool continents = true;
-  bool colloquial = true;
-  bool abbrev = true;
-  bool official = true;
+gamemode? mode = gamemode.two_player;
 
-  gamemode? mode = gamemode.two_player;
+class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +229,7 @@ class _SettingsState extends State<Settings> {
                           SizedBox(
                             width: 180.0,
                             child: Text(
-                              "Abbreviated Name",
+                              "Abbreviated Names",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w400,
@@ -264,7 +265,7 @@ class _SettingsState extends State<Settings> {
                           SizedBox(
                             width: 180.0,
                             child: Text(
-                              "Official Name",
+                              "Official Names",
                               style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w400,

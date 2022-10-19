@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome.dart';
+import 'settings.dart';
 
 class Player extends StatefulWidget {
   const Player({Key? key}) : super(key: key);
@@ -9,7 +10,8 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
-  List continents = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
+  List<String> continentsNames = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
+  List<String> locations = [];
   List<String> playerMoves = [];
   int player = 1;
   int turnCount = 1;
@@ -27,16 +29,42 @@ class _PlayerState extends State<Player> {
     super.dispose();
   }
 
+  String toProperCase(String location) {
+    List<String> joiners = [" ", "-"];
+    for (var i = 0; i < joiners.length; i++) {
+      location = location.split(joiners[i]).map((word) => word[0].toUpperCase() + word.substring(1)).join(joiners[i]);
+    }
+    return location;
+  }
+
   @override
   Widget build(BuildContext context) {
 
     for (var i = 0; i < nameList1.length; i++) {
-      offNames.add(nameList1[i]["offName"].toString().toLowerCase());
+      offNames.add(nameList1[i]["offName"].toLowerCase());
     }
 
     for(var i = 0; i < nameList2.length; i++){
-      colNames.add(nameList2[i]["name"].toString().toLowerCase());
-      capNames.add(nameList2[i]["capital"].toString().toLowerCase());
+      colNames.add(nameList2[i]["name"].toLowerCase());
+      capNames.add(nameList2[i]["capital"].toLowerCase());
+    }
+
+    if (capitals) {
+      locations.addAll(capNames);
+    }
+    if (continents) {
+      locations.addAll(continentsNames);
+    }
+    if (countries) {
+      if (colloquial) {
+        locations.addAll(colNames);
+      }
+      // if (abbrev) {
+      //
+      // }
+      if (official) {
+        locations.addAll(offNames);
+      }
     }
 
     return Scaffold(
@@ -95,7 +123,7 @@ class _PlayerState extends State<Player> {
                         onPressed: () {
                           setState(() {
                             String move = nameGetter.text.toString().trim().toLowerCase();
-                            if ((capNames.contains(move) || colNames.contains(move) || continents.contains(move) || offNames.contains(move)) && !playerMoves.contains(move)){
+                            if (locations.contains(move) && !playerMoves.contains(move)){
                               String firstLetter = move.substring(0,1);
                                 if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
                                   playerMoves.add(move);
@@ -172,7 +200,7 @@ class _PlayerState extends State<Player> {
                                       alignment: Alignment.center,
                                       color: index.isEven ? Colors.red[400] : Colors.blue[400],
                                       child: Text(
-                                        playerMoves[index].split(" ").map((word) => word[0].toUpperCase() + word.substring(1)).join(" "),
+                                        toProperCase(playerMoves[index]),
                                         textAlign: TextAlign.center,
                                       ),
                                     );
