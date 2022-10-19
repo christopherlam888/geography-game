@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'welcome.dart';
 
 class Player extends StatefulWidget {
   const Player({Key? key}) : super(key: key);
@@ -7,12 +8,12 @@ class Player extends StatefulWidget {
   State<Player> createState() => _PlayerState();
 }
 
-
 class _PlayerState extends State<Player> {
-
+  List continents = ["Asia", "Europe", "North America", "Oceania", "Antarctica", "South America", "Africa"];
   int player = 1;
   List<String> playerMoves = [];
-
+  String move = "";
+  String first_letter = "";
   int turnCount = 1;
   int slotCount = 0;
 
@@ -30,6 +31,16 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
+
+    for (var i = 0; i < nameList1.length; i++) {
+      offNames.add(nameList1[i]["offName"]);
+    }
+
+    for(var i = 0; i < nameList2.length; i++){
+      colNames.add(nameList2[i]["name"]);
+      capNames.add(nameList2[i]["capital"]);
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange[900],
@@ -83,18 +94,31 @@ class _PlayerState extends State<Player> {
                     ElevatedButton(
                         onPressed: () {
                           setState(() {
-                            if (player == 1) {
-                              playerMoves.add(name_getter.text.toString());
-                              player = 2;
+                            move = name_getter.text.toString();
+                            move = move.substring(0,1).toUpperCase() + move.substring(1).toLowerCase();
+
+                            if (capNames.contains(move) || colNames.contains(move) || continents.contains(move) || offNames.contains(move)){
+                              first_letter = move.substring(0,1).toLowerCase();
+                                if ((player == 1) && (playerMoves.isEmpty || playerMoves[slotCount-1].endsWith(first_letter))) {
+                                  playerMoves.add(move);
+                                  slotCount++;
+                                  player = 2;
+                                }
+                                else if (playerMoves[slotCount-1].endsWith(first_letter)){
+                                  playerMoves.add(move);
+                                  turnCount++;
+                                  slotCount++;
+                                  player = 1;
+                                }
+                                else {
+                                  print("wrong!");
+                                }
                             }
-                            else {
-                              playerMoves.add(name_getter.text.toString());
-                              turnCount++;
-                              player = 1;
+                            else{
+                              print("Wrong!");
                             }
-                            slotCount++;
                             name_getter.clear();
-                          });
+                         });
                         },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.amber[900],
