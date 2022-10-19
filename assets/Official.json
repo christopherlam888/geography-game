@@ -12,7 +12,7 @@
   },
   {
     "country": "Algeria",
-    "offName": "People’s Democratic Republic of Algeria",
+    "offName": "People's Democratic Republic of Algeria",
     "continent": "Africa"
   },
   {
@@ -72,7 +72,7 @@
   },
   {
     "country": "Bangladesh",
-    "offName": "People’s Republic of Bangladesh",
+    "offName": "People's Republic of Bangladesh",
     "continent": "Asia"
   },
   {
@@ -102,7 +102,17 @@
   },
   {
     "country": "Bermuda",
-    "offName": "Bermuda (alt: the Bermudas; Somers Isles)",
+    "offName": "Bermuda",
+    "continent": "North America"
+  },
+  {
+    "country": "Bermuda",
+    "offName": "The Bermudas",
+    "continent": "North America"
+  },
+  {
+    "country": "Bermuda",
+    "offName": "Somers Isles",
     "continent": "North America"
   },
   {
@@ -187,7 +197,7 @@
   },
   {
     "country": "China",
-    "offName": "People’s Republic of China",
+    "offName": "People's Republic of China",
     "continent": "Asia"
   },
   {
@@ -312,12 +322,22 @@
   },
   {
     "country": "France",
-    "offName": "French Republic (République française)",
+    "offName": "French Republic",
+    "continent": "Europe"
+  },
+  {
+    "country": "France",
+    "offName": "République française",
     "continent": "Europe"
   },
   {
     "country": "French Polynesia",
-    "offName": "French Polynesia (Polynésie française)",
+    "offName": "French Polynesia",
+    "continent": "Oceania"
+  },
+  {
+    "country": "French Polynesia",
+    "offName": "Polynésie française",
     "continent": "Oceania"
   },
   {
@@ -397,7 +417,7 @@
   },
   {
     "country": "Hungary",
-    "offName": "Hungary (formerly \"Republic of Hungary\")",
+    "offName": "Hungary",
     "continent": "Europe"
   },
   {
@@ -437,12 +457,17 @@
   },
   {
     "country": "Italy",
-    "offName": "Italian Republic/Republic of Italy",
+    "offName": "Italian Republic",
+    "continent": "Europe"
+  },
+  {
+    "country": "Italy",
+    "offName": "Republic of Italy",
     "continent": "Europe"
   },
   {
     "country": "Ivory Coast",
-    "offName": "Republic of Côte d’Ivoire",
+    "offName": "Republic of Côte d'Ivoire",
     "continent": "Africa"
   },
   {
@@ -487,7 +512,7 @@
   },
   {
     "country": "Laos",
-    "offName": "Lao People’s Democratic Republic",
+    "offName": "Lao People's Democratic Republic",
     "continent": "Asia"
   },
   {
@@ -647,7 +672,12 @@
   },
   {
     "country": "New Caledonia",
-    "offName": "New Caledonia (Nouvelle-Calédonie)",
+    "offName": "New Caledonia",
+    "continent": "Oceania"
+  },
+  {
+    "country": "New Caledonia",
+    "offName": "Nouvelle-Calédonie",
     "continent": "Oceania"
   },
   {
@@ -677,7 +707,7 @@
   },
   {
     "country": "North Korea",
-    "offName": "Democratic People’s Republic of Korea",
+    "offName": "Democratic People's Republic of Korea",
     "continent": "Asia"
   },
   {
@@ -937,7 +967,7 @@
   },
   {
     "country": "Tokelau",
-    "offName": "Tokelau (formerly Union Islands or Tokelau Islands)",
+    "offName": "Tokelau",
     "continent": "Oceania"
   },
   {
@@ -997,7 +1027,12 @@
   },
   {
     "country": "Uruguay",
-    "offName": "Eastern Republic of Uruguay / Oriental Republic of Uruguay",
+    "offName": "Eastern Republic of Uruguay",
+    "continent": "South America"
+  },
+  {
+    "country": "Uruguay",
+    "offName": "Oriental Republic of Uruguay",
     "continent": "South America"
   },
   {

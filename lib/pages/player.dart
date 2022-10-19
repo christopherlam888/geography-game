@@ -163,6 +163,7 @@ class _PlayerState extends State<Player> {
                       style: const TextStyle(
                         fontSize: 15.0,
                         color: Colors.red,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
 
@@ -199,9 +200,14 @@ class _PlayerState extends State<Player> {
                                     return Container(
                                       alignment: Alignment.center,
                                       color: index.isEven ? Colors.red[400] : Colors.blue[400],
-                                      child: Text(
-                                        toProperCase(playerMoves[index]),
-                                        textAlign: TextAlign.center,
+                                      child: SingleChildScrollView(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 5.0),
+                                          child: Text(
+                                            toProperCase(playerMoves[index]),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
                                       ),
                                     );
                                   },
