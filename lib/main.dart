@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:geography_game/pages/welcome.dart';
-import 'package:geography_game/pages/player.dart';
-import 'package:geography_game/pages/rules.dart';
-import 'package:geography_game/pages/settings.dart';
-import 'package:geography_game/pages/about.dart';
+import 'pages/welcome.dart';
+import 'pages/player.dart';
+import 'pages/rules.dart';
+import 'pages/settings.dart';
+import 'pages/about.dart';
 
 void main() {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/welcome',
       routes: {
-        '/welcome' : (context) => Welcome(),
-        '/player' : (context) => Player(),
-        '/rules' : (context) => Rules(),
-        '/settings' : (context) => Settings(),
-        '/about' : (context) => About(),
+        '/welcome' : (context) => const Welcome(),
+        '/player' : (context) => const Player(),
+        '/rules' : (context) => const Rules(),
+        '/settings' : (context) => const Settings(),
+        '/about' : (context) => const About(),
       }
   ));
 }

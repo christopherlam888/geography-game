@@ -69,7 +69,7 @@ class _PlayerState extends State<Player> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.deepOrange,
         title: const Text("Player"),
       ),
       body: Container(
@@ -82,32 +82,37 @@ class _PlayerState extends State<Player> {
                 Column(
                   children:[
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 5.0),
                       child: Text(
                         "Player $player",
                         style: TextStyle(
-                          fontSize: 35.0,
+                          fontSize: 30.0,
                           color: player.isOdd ? Colors.red[400] : Colors.blue[400],
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-
                     Text(
-                      "Turn: $turnCount",
+                      "Turn #$turnCount",
                       style: const TextStyle(
-                        fontSize: 30.0,
+                        fontSize: 20.0,
                       ),
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: SizedBox(
                         width: 240,
                         child: TextField(
                           controller: nameGetter,
                           decoration: const InputDecoration(
                             hintText: "Enter a location",
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.deepOrange,
+                                width: 2,
+                              ),
+                            ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.deepOrange,
@@ -119,67 +124,101 @@ class _PlayerState extends State<Player> {
                       ),
                     ),
 
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            String move = nameGetter.text.toString().trim().toLowerCase();
-                            if (locations.contains(move) && !playerMoves.contains(move)){
-                              String firstLetter = move.substring(0,1);
-                                if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
-                                  playerMoves.add(move);
+                    SizedBox(
+                      width: 240,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  String move = nameGetter.text.toString().trim().toLowerCase();
+                                  if (locations.contains(move) && !playerMoves.contains(move)){
+                                    String firstLetter = move.substring(0,1);
+                                      if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
+                                        playerMoves.add(move);
+                                        player = 2;
+                                        errorMessage = "";
+                                      }
+                                      else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
+                                        playerMoves.add(move);
+                                        turnCount++;
+                                        player = 1;
+                                        errorMessage = "";
+                                      }
+                                      else {
+                                        errorMessage = "Try Again!";
+                                      }
+                                  }
+                                  else{
+                                    errorMessage = "Try Again!";
+                                  }
+                                  nameGetter.clear();
+                               });
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.amber[900],
+                                side: const BorderSide(color: Colors.deepOrange, width: 4),
+                            ),
+                              child: const Text(
+                                "Go!",
+                                style: TextStyle(
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                //TODO: Game win logic
+                                if (player == 1) {
                                   player = 2;
-                                  errorMessage = "";
-                                }
-                                else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
-                                  playerMoves.add(move);
-                                  turnCount++;
-                                  player = 1;
-                                  errorMessage = "";
                                 }
                                 else {
-                                  errorMessage = "Try Again!";
+                                  player = 1;
+                                  turnCount++;
                                 }
-                            }
-                            else{
-                              errorMessage = "Try Again!";
-                            }
-                            nameGetter.clear();
-                         });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.amber[900],
-                          side: const BorderSide(color: Colors.deepOrange, width: 4),
-                      ),
-                        child: const Text(
-                          "Go!",
-                          style: TextStyle(
-                            fontSize: 24.0,
+                                nameGetter.clear();
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
+                            child: const Text(
+                              "Give Up",
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 5.0),
                     Text(
                       errorMessage,
                       style: const TextStyle(
                         fontSize: 15.0,
-                        color: Colors.red,
+                        color: Colors.deepOrange,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
 
                     const Padding(
-                      padding: EdgeInsets.only(top: 25.0, bottom: 25.0),
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                       child: Text(
-                        "Moves Played:",
+                        "Moves Played",
                         style: TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 20.0,
+                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
 
                     SizedBox(
-                      height: 340,
-                      width: 180,
+                      height: 330,
+                      width: 240,
                       child: Scrollbar(
                         thumbVisibility: true,
                         controller: scrollController,
@@ -190,10 +229,10 @@ class _PlayerState extends State<Player> {
                           slivers: <Widget> [
                             SliverGrid(
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 90,
+                                maxCrossAxisExtent: 120,
                                 mainAxisSpacing: 1.5,
                                 crossAxisSpacing: 1.5,
-                                childAspectRatio: 2.0,
+                                childAspectRatio: 3.0,
                               ),
                               delegate: SliverChildBuilderDelegate(
                                   (BuildContext context, int index) {

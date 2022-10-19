@@ -24,7 +24,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.deepOrange,
         title: const Text("Settings"),
       ),
       body: Container(
@@ -60,7 +60,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                       value: countries,
-                      activeColor: Colors.red,
+                      activeColor: Colors.deepOrange,
                       onChanged: (bool value){
                         setState(() {
                            countries = value;
@@ -85,7 +85,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                         value: capitals,
-                        activeColor: Colors.red,
+                        activeColor: Colors.deepOrange,
                         onChanged: (bool value){
                           setState(() {
                             capitals = value;
@@ -110,7 +110,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                         value: continents,
-                        activeColor: Colors.red,
+                        activeColor: Colors.deepOrange,
                         onChanged: (bool value){
                           setState(() {
                             continents = value;
@@ -143,7 +143,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     value: gamemode.singleplayer,
                     groupValue: mode,
-                    activeColor: Colors.red,
+                    activeColor: Colors.deepOrange,
                     onChanged: (gamemode? value){
                       setState(() {
                         mode = value;
@@ -164,7 +164,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     value: gamemode.two_player,
                     groupValue: mode,
-                    activeColor: Colors.red,
+                    activeColor: Colors.deepOrange,
                     onChanged: (gamemode? value){
                       setState(() {
                         mode = value;
@@ -209,7 +209,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                         value: colloquial,
-                        activeColor: Colors.red,
+                        activeColor: Colors.deepOrange,
                         onChanged: (bool value){
                           setState(() {
                             colloquial = value;
@@ -245,7 +245,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                         value: abbrev,
-                        activeColor: Colors.red,
+                        activeColor: Colors.deepOrange,
                         onChanged: (bool value){
                           setState(() {
                             abbrev = value;
@@ -280,7 +280,7 @@ class _SettingsState extends State<Settings> {
                     ),
                     Switch(
                         value: official,
-                        activeColor: Colors.red,
+                        activeColor: Colors.deepOrange,
                         onChanged: (bool value){
                           setState(() {
                             official = value;

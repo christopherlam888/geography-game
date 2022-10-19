@@ -28,7 +28,7 @@ class _AboutState extends State<About> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.deepOrange,
         title: const Text("About"),
       ),
       body: Container(

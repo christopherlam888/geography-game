@@ -12,7 +12,7 @@ class _RulesState extends State<Rules> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.deepOrange,
         title: const Text("Rules"),
       ),
       body: Container(
@@ -25,23 +25,21 @@ class _RulesState extends State<Rules> {
                 Column(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 7.0, bottom: 8.0),
+                      padding: EdgeInsets.only(top: 20.0, bottom: 10.0),
                       child: Text(
                           "Rules",
                         style: TextStyle(
-                          fontSize: 50.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
-                          decorationThickness: 2.4,
                         ),
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(top: 7.0, left: 14.0, right: 7.0, bottom: 7.0),
+                      padding: const EdgeInsets.only(top: 10.0, left: 15.0, right: 10.0, bottom: 10.0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 4,
-                            color: Colors.orange
+                            color: Colors.deepOrange,
                         ),
                         borderRadius: BorderRadius.circular(10),
 
@@ -63,8 +61,7 @@ class _RulesState extends State<Rules> {
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.left,
                           style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
                           ),
                         ),
                       ),

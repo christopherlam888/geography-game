@@ -38,7 +38,7 @@ class _WelcomeState extends State<Welcome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.deepOrange,
         title: const Text("Geography Game"),
       ),
       drawer: const NavBar(),
