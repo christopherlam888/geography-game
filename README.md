@@ -1,16 +1,18 @@
-# geography_game
+# Geography Game
 
 A simple game to test your knowledge of geography. Name countries, capitals, and continents.
 
-## Getting Started
+Read the Rules page in-app to learn how to play.
 
-This project is a starting point for a Flutter application.
+Change your game settings to choose whether to include countries, capitals, and/or continents as well as colloquial and/or official names.
 
-A few resources to get you started if this is your first Flutter project:
+Single-player and two-player gamemodes.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+***
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Features to implement:
+- 
+
+***
+
+This project is licensed under the GNU General Public License v3.0.

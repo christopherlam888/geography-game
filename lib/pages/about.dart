@@ -40,7 +40,9 @@ class _AboutState extends State<About> {
               Center(
                 child: Column(
                   children: [
-                    //Image here
+                    const Image(
+                      image: AssetImage('assets/globe.png'),
+                    ),
                     const SizedBox(height: 20.0),
                     const Text(
                       "Geography Game",

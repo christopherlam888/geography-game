@@ -49,7 +49,7 @@ class _WelcomeState extends State<Welcome> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "Welcome!",
+                        "WELCOME!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class _WelcomeState extends State<Welcome> {
                   ),
                 ),
                 const Image(
-                  image: AssetImage('assets/globe-spinning3.gif'),
+                  image: AssetImage('assets/globe-spinning.gif'),
                   width: 600.0,
                   height: 400.0,
                 ),
