@@ -57,8 +57,9 @@ class _WinState extends State<Win> {
                     const SizedBox(height: 5.0),
                     Text(
                       "Last Move: $lastMove",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 20.0,
+                        color: playerResult.isOdd ? Colors.red[400] : Colors.blue[400],
                       ),
                     ),
                     const Padding(

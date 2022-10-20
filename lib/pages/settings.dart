@@ -219,42 +219,6 @@ class _SettingsState extends State<Settings> {
                           SizedBox(
                             width: 180.0,
                             child: Text(
-                              "Abbreviated Names",
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(
-                            width: 180.0,
-                            child: Text("e.g. DPRK")),
-                        ],
-                      ),
-                    ),
-                    Switch(
-                        value: abbrev,
-                        activeColor: Colors.deepOrange,
-                        onChanged: (bool value){
-                          setState(() {
-                            abbrev = value;
-                          });
-                        }
-                    ),
-                  ],
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Column(
-                        children: const [
-                          SizedBox(
-                            width: 180.0,
-                            child: Text(
                               "Official Names",
                               style: TextStyle(
                                 fontSize: 20.0,

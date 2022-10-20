@@ -36,9 +36,6 @@ class _PlayerState extends State<Player> {
       if (colloquial) {
         locations.addAll(colNames);
       }
-      // if (abbrev) {
-      //
-      // }
       if (official) {
         locations.addAll(offNames);
       }
@@ -195,6 +192,7 @@ class _PlayerState extends State<Player> {
                                 if (pendingWin == false) {
                                   if (playerMoves.isEmpty) {
                                     errorMessage = "Enter any location!";
+                                    nameGetter.clear();
                                   }
                                   else if (player == 1) {
                                     player = 2;

@@ -3,13 +3,7 @@ import 'navbar.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/services.dart';
-
-List nameList1 = [];
-List<String> offNames = [];
-//List abrv_Names = []; Not sure if we wanna add this
-List nameList2 = [];
-List<String> colNames = [];
-List<String> capNames = [];
+import 'package:geography_game/variables.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
