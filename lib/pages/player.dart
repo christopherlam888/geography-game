@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'welcome.dart';
+import 'dart:math';
 import 'package:geography_game/variables.dart';
 import 'package:geography_game/functions.dart';
 
@@ -49,6 +49,41 @@ class _PlayerState extends State<Player> {
   void dispose(){
     nameGetter.dispose();
     super.dispose();
+  }
+
+  String generateRandomMove() {
+    var random = Random();
+    bool correct = false;
+    int index = 0;
+    String firstLetter = "";
+    List<String> generatedRandomMoves = [];
+    while (generatedRandomMoves.length != locations.length) {
+      index = random.nextInt(locations.length);
+      firstLetter = locations[index].substring(0,1);
+      if (!generatedRandomMoves.contains(locations[index])) {
+        generatedRandomMoves.add(locations[index]);
+      }
+      if (!playerMoves.contains(locations[index]) && playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+        correct = true;
+        break;
+      }
+    }
+    if (correct == true) {
+      return locations[index];
+    }
+    else {
+      setWin(playerMoves[playerMoves.length-1]);
+      return "No more locations";
+    }
+  }
+
+  void setWin(String move){
+    playerMovesResults = playerMoves;
+    playerResult = player;
+    turnCountResult = turnCount;
+    lastMove = toProperCase(move);
+    Navigator.pop(context);
+    Navigator.pushNamed(context, '/win');
   }
 
   @override
@@ -130,19 +165,16 @@ class _PlayerState extends State<Player> {
                           ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                                  String move = nameGetter.text.toString().trim().toLowerCase();
-                                  if (locations.contains(move) && !playerMoves.contains(move)){
-                                    String firstLetter = move.substring(0,1);
+                                  if (mode == gamemode.two_player) {
+                                    String move = nameGetter.text.toString().trim().toLowerCase();
+                                    if (locations.contains(move) && !playerMoves.contains(move)){
+                                      String firstLetter = move.substring(0,1);
                                       if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
                                         errorMessage = "";
                                         if (pendingWin) {
                                           turnCount++;
-                                          playerMovesResults = playerMoves;
-                                          playerResult = player;
-                                          turnCountResult = turnCount;
-                                          lastMove = toProperCase(move);
-                                          Navigator.pop(context);
-                                          Navigator.pushNamed(context, '/win');
+                                          setWin(move);
+
                                         }
                                         else {
                                           playerMoves.add(move);
@@ -152,12 +184,7 @@ class _PlayerState extends State<Player> {
                                       else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
                                         errorMessage = "";
                                         if (pendingWin) {
-                                          playerMovesResults = playerMoves;
-                                          playerResult = player;
-                                          turnCountResult = turnCount;
-                                          lastMove = toProperCase(move);
-                                          Navigator.pop(context);
-                                          Navigator.pushNamed(context, '/win');
+                                          setWin(move);
                                         }
                                         else {
                                           playerMoves.add(move);
@@ -168,11 +195,40 @@ class _PlayerState extends State<Player> {
                                       else {
                                         errorMessage = "Try Again!";
                                       }
+                                    }
+                                    else{
+                                      errorMessage = "Try Again!";
+                                    }
+                                    nameGetter.clear();
                                   }
-                                  else{
-                                    errorMessage = "Try Again!";
+                                  else {
+                                    if (player == 1) {
+                                      String move = nameGetter.text.toString().trim().toLowerCase();
+                                      if (locations.contains(move) && !playerMoves.contains(move)) {
+                                        String firstLetter = move.substring(0,1);
+                                        if (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+                                          errorMessage = "";
+                                          if (pendingWin) {
+                                            turnCount++;
+                                            setWin(move);
+
+                                          }
+                                          else {
+                                            playerMoves.add(move);
+                                            playerMoves.add(generateRandomMove());
+                                            turnCount++;
+                                          }
+                                        }
+                                        else {
+                                          errorMessage = "Try Again!";
+                                        }
+                                      }
+                                      else {
+                                        errorMessage = "Try Again!";
+                                      }
+                                      nameGetter.clear();
+                                    }
                                   }
-                                  nameGetter.clear();
                                });
                               },
                               style: ElevatedButton.styleFrom(
@@ -189,28 +245,43 @@ class _PlayerState extends State<Player> {
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                if (pendingWin == false) {
+                                if (mode == gamemode.two_player) {
+                                  if (pendingWin == false) {
+                                    if (playerMoves.isEmpty) {
+                                      errorMessage = "Enter any location!";
+                                      nameGetter.clear();
+                                    }
+                                    else if (player == 1) {
+                                      player = 2;
+                                      nameGetter.clear();
+                                      pendingWin = true;
+                                    }
+                                    else {
+                                      player = 1;
+                                      nameGetter.clear();
+                                      pendingWin = true;
+                                    }
+                                  }
+                                  else {
+                                    nameGetter.clear();
+                                    playerMovesResults = playerMoves;
+                                    turnCountResult = turnCount;
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/tie');
+                                  }
+                                }
+                                else {
                                   if (playerMoves.isEmpty) {
                                     errorMessage = "Enter any location!";
                                     nameGetter.clear();
                                   }
-                                  else if (player == 1) {
-                                    player = 2;
-                                    nameGetter.clear();
-                                    pendingWin = true;
-                                  }
                                   else {
-                                    player = 1;
                                     nameGetter.clear();
-                                    pendingWin = true;
+                                    playerMovesResults = playerMoves;
+                                    turnCountResult = turnCount;
+                                    Navigator.pop(context);
+                                    Navigator.pushNamed(context, '/end');
                                   }
-                                }
-                                else {
-                                  nameGetter.clear();
-                                  playerMovesResults = playerMoves;
-                                  turnCountResult = turnCount;
-                                  Navigator.pop(context);
-                                  Navigator.pushNamed(context, '/tie');
                                 }
                               });
                             },
