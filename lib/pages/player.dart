@@ -62,10 +62,10 @@ class _PlayerState extends State<Player> {
       firstLetter = locations[index].substring(0,1);
       if (!generatedRandomMoves.contains(locations[index])) {
         generatedRandomMoves.add(locations[index]);
-      }
-      if (!playerMoves.contains(locations[index]) && playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
-        correct = true;
-        break;
+        if (!playerMoves.contains(locations[index]) && playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+          correct = true;
+          break;
+        }
       }
     }
     if (correct == true) {
@@ -90,12 +90,18 @@ class _PlayerState extends State<Player> {
   Widget build(BuildContext context) {
 
     for (var i = 0; i < nameList1.length; i++) {
-      offNames.add(nameList1[i]["offName"].toLowerCase());
+      if (nameList1[i]["offName"].isNotEmpty) {
+        offNames.add(nameList1[i]["offName"].toLowerCase());
+      }
     }
 
     for(var i = 0; i < nameList2.length; i++){
-      colNames.add(nameList2[i]["name"].toLowerCase());
-      capNames.add(nameList2[i]["capital"].toLowerCase());
+      if (nameList2[i]["name"].isNotEmpty) {
+        colNames.add(nameList2[i]["name"].toLowerCase());
+      }
+      if (nameList2[i]["capital"].isNotEmpty) {
+        capNames.add(nameList2[i]["capital"].toLowerCase());
+      }
     }
 
     generateLocationsList();
