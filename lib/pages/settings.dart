@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-
-bool countries = true;
-bool capitals = true;
-bool continents = true;
-bool colloquial = true;
-bool abbrev = true;
-bool official = true;
+import 'package:geography_game/variables.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -13,10 +7,6 @@ class Settings extends StatefulWidget {
   @override
   State<Settings> createState() => _SettingsState();
 }
-
-enum gamemode {singleplayer, two_player}
-
-gamemode? mode = gamemode.two_player;
 
 class _SettingsState extends State<Settings> {
 

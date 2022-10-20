@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:geography_game/variables.dart';
 import 'package:geography_game/functions.dart';
 
-class Win extends StatefulWidget {
-  const Win({Key? key}) : super(key: key);
+class Tie extends StatefulWidget {
+  const Tie({Key? key}) : super(key: key);
 
   @override
-  State<Win> createState() => _WinState();
+  State<Tie> createState() => _TieState();
 }
 
-class _WinState extends State<Win> {
+class _TieState extends State<Tie> {
 
-  final winScrollController = ScrollController();
+  final tieScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,
-        title: const Text("Congratulations!"),
+        title: const Text("Tie!"),
       ),
       body: Container(
         color: Colors.orange[200],
@@ -32,31 +32,15 @@ class _WinState extends State<Win> {
                     const Padding(
                       padding: EdgeInsets.only(top: 20.0, bottom: 5.0),
                       child: Text(
-                        "You Win!",
+                        "You Tie!",
                         style: TextStyle(
-                          fontSize: 50.0,
+                          fontSize: 30.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                     Text(
-                      "Player $playerResult",
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        color: playerResult.isOdd ? Colors.red[400] : Colors.blue[400],
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 5.0),
-                    Text(
                       "Turn #$turnCountResult",
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      "Last Move: $lastMove",
                       style: const TextStyle(
                         fontSize: 20.0,
                       ),
@@ -77,11 +61,11 @@ class _WinState extends State<Win> {
                       width: 240,
                       child: Scrollbar(
                         thumbVisibility: true,
-                        controller: winScrollController,
+                        controller: tieScrollController,
                         radius: const Radius.circular(2.5),
                         thickness: 5.0,
                         child: CustomScrollView(
-                          controller: winScrollController,
+                          controller: tieScrollController,
                           slivers: <Widget> [
                             SliverGrid(
                               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'welcome.dart';
-import 'settings.dart';
+import 'package:geography_game/variables.dart';
+import 'package:geography_game/functions.dart';
 
 class Player extends StatefulWidget {
   const Player({Key? key}) : super(key: key);
@@ -11,7 +12,6 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
 
-  List<String> continentsNames = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
   List<String> locations = [];
 
   List<String> playerMoves = [];
@@ -25,35 +25,7 @@ class _PlayerState extends State<Player> {
   final scrollController = ScrollController();
   final nameGetter = TextEditingController();
 
-  void clear(){
-    nameGetter.clear();
-  }
-  @override
-  void dispose(){
-    nameGetter.dispose();
-    super.dispose();
-  }
-
-  String toProperCase(String location) {
-    List<String> joiners = [" ", "-"];
-    for (var i = 0; i < joiners.length; i++) {
-      location = location.split(joiners[i]).map((word) => word[0].toUpperCase() + word.substring(1)).join(joiners[i]);
-    }
-    return location;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    for (var i = 0; i < nameList1.length; i++) {
-      offNames.add(nameList1[i]["offName"].toLowerCase());
-    }
-
-    for(var i = 0; i < nameList2.length; i++){
-      colNames.add(nameList2[i]["name"].toLowerCase());
-      capNames.add(nameList2[i]["capital"].toLowerCase());
-    }
-
+  void generateLocationsList() {
     if (capitals) {
       locations.addAll(capNames);
     }
@@ -71,6 +43,30 @@ class _PlayerState extends State<Player> {
         locations.addAll(offNames);
       }
     }
+  }
+
+  void clear(){
+    nameGetter.clear();
+  }
+  @override
+  void dispose(){
+    nameGetter.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    for (var i = 0; i < nameList1.length; i++) {
+      offNames.add(nameList1[i]["offName"].toLowerCase());
+    }
+
+    for(var i = 0; i < nameList2.length; i++){
+      colNames.add(nameList2[i]["name"].toLowerCase());
+      capNames.add(nameList2[i]["capital"].toLowerCase());
+    }
+
+    generateLocationsList();
 
     return Scaffold(
       appBar: AppBar(
@@ -143,6 +139,11 @@ class _PlayerState extends State<Player> {
                                       if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
                                         errorMessage = "";
                                         if (pendingWin) {
+                                          turnCount++;
+                                          playerMovesResults = playerMoves;
+                                          playerResult = player;
+                                          turnCountResult = turnCount;
+                                          lastMove = toProperCase(move);
                                           Navigator.pop(context);
                                           Navigator.pushNamed(context, '/win');
                                         }
@@ -154,6 +155,10 @@ class _PlayerState extends State<Player> {
                                       else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
                                         errorMessage = "";
                                         if (pendingWin) {
+                                          playerMovesResults = playerMoves;
+                                          playerResult = player;
+                                          turnCountResult = turnCount;
+                                          lastMove = toProperCase(move);
                                           Navigator.pop(context);
                                           Navigator.pushNamed(context, '/win');
                                         }
@@ -187,19 +192,27 @@ class _PlayerState extends State<Player> {
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                if (playerMoves.isEmpty) {
-                                  errorMessage = "Enter any location!";
-                                }
-                                else if (player == 1) {
-                                  player = 2;
-                                  nameGetter.clear();
-                                  pendingWin = true;
+                                if (pendingWin == false) {
+                                  if (playerMoves.isEmpty) {
+                                    errorMessage = "Enter any location!";
+                                  }
+                                  else if (player == 1) {
+                                    player = 2;
+                                    nameGetter.clear();
+                                    pendingWin = true;
+                                  }
+                                  else {
+                                    player = 1;
+                                    nameGetter.clear();
+                                    pendingWin = true;
+                                  }
                                 }
                                 else {
-                                  player = 1;
-                                  turnCount++;
                                   nameGetter.clear();
-                                  pendingWin = true;
+                                  playerMovesResults = playerMoves;
+                                  turnCountResult = turnCount;
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, '/tie');
                                 }
                               });
                             },

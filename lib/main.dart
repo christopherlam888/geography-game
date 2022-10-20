@@ -5,6 +5,7 @@ import 'pages/rules.dart';
 import 'pages/settings.dart';
 import 'pages/about.dart';
 import 'pages/win.dart';
+import 'pages/tie.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -17,6 +18,7 @@ void main() {
         '/settings' : (context) => const Settings(),
         '/about' : (context) => const About(),
         '/win' : (context) => const Win(),
+        '/tie' : (context) => const Tie(),
       }
   ));
 }
