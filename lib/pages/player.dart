@@ -26,6 +26,7 @@ class _PlayerState extends State<Player> {
   final nameGetter = TextEditingController();
 
   void generateLocationsList() {
+    locations = [];
     if (capitals) {
       locations.addAll(capNames);
     }
