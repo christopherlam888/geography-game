@@ -4,6 +4,7 @@ import 'pages/player.dart';
 import 'pages/rules.dart';
 import 'pages/settings.dart';
 import 'pages/about.dart';
+import 'pages/win.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,6 +16,7 @@ void main() {
         '/rules' : (context) => const Rules(),
         '/settings' : (context) => const Settings(),
         '/about' : (context) => const About(),
+        '/win' : (context) => const Win(),
       }
   ));
 }

@@ -10,12 +10,17 @@ class Player extends StatefulWidget {
 }
 
 class _PlayerState extends State<Player> {
+
   List<String> continentsNames = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
   List<String> locations = [];
+
   List<String> playerMoves = [];
   int player = 1;
   int turnCount = 1;
+
   String errorMessage = "";
+
+  bool pendingWin = false;
 
   final scrollController = ScrollController();
   final nameGetter = TextEditingController();
@@ -136,15 +141,27 @@ class _PlayerState extends State<Player> {
                                   if (locations.contains(move) && !playerMoves.contains(move)){
                                     String firstLetter = move.substring(0,1);
                                       if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
-                                        playerMoves.add(move);
-                                        player = 2;
                                         errorMessage = "";
+                                        if (pendingWin) {
+                                          Navigator.pop(context);
+                                          Navigator.pushNamed(context, '/win');
+                                        }
+                                        else {
+                                          playerMoves.add(move);
+                                          player = 2;
+                                        }
                                       }
                                       else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
-                                        playerMoves.add(move);
-                                        turnCount++;
-                                        player = 1;
                                         errorMessage = "";
+                                        if (pendingWin) {
+                                          Navigator.pop(context);
+                                          Navigator.pushNamed(context, '/win');
+                                        }
+                                        else {
+                                          playerMoves.add(move);
+                                          turnCount++;
+                                          player = 1;
+                                        }
                                       }
                                       else {
                                         errorMessage = "Try Again!";
@@ -170,15 +187,20 @@ class _PlayerState extends State<Player> {
                           ElevatedButton(
                             onPressed: () {
                               setState(() {
-                                //TODO: Game win logic
-                                if (player == 1) {
+                                if (playerMoves.isEmpty) {
+                                  errorMessage = "Enter any location!";
+                                }
+                                else if (player == 1) {
                                   player = 2;
+                                  nameGetter.clear();
+                                  pendingWin = true;
                                 }
                                 else {
                                   player = 1;
                                   turnCount++;
+                                  nameGetter.clear();
+                                  pendingWin = true;
                                 }
-                                nameGetter.clear();
                               });
                             },
                             style: ElevatedButton.styleFrom(
