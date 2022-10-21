@@ -12,8 +12,6 @@ class Player extends StatefulWidget {
 
 class _PlayerState extends State<Player> {
 
-  List<String> locations = [];
-
   List<String> playerMoves = [];
   int player = 1;
   int turnCount = 1;
@@ -24,40 +22,6 @@ class _PlayerState extends State<Player> {
 
   final scrollController = ScrollController();
   final nameGetter = TextEditingController();
-
-  void generateLocationsList() {
-    locations = [];
-    if (capitals) {
-      for (var i = 0; i < capNames.length; i++){
-        if (!locations.contains(capNames[i])) {
-          locations.add(capNames[i]);
-        }
-      }
-    }
-    if (continents) {
-      for (var i = 0; i < continentsNames.length; i++){
-        if (!locations.contains(continentsNames[i])) {
-          locations.add(continentsNames[i]);
-        }
-      }
-    }
-    if (countries) {
-      if (colloquial) {
-        for (var i = 0; i < colNames.length; i++){
-          if (!locations.contains(colNames[i])) {
-            locations.add(colNames[i]);
-          }
-        }
-      }
-      if (official) {
-        for (var i = 0; i < offNames.length; i++){
-          if (!locations.contains(offNames[i])) {
-            locations.add(offNames[i]);
-          }
-        }
-      }
-    }
-  }
 
   void clear(){
     nameGetter.clear();
@@ -105,24 +69,6 @@ class _PlayerState extends State<Player> {
 
   @override
   Widget build(BuildContext context) {
-
-    for (var i = 0; i < nameList1.length; i++) {
-      if (nameList1[i]["offName"].isNotEmpty) {
-        offNames.add(nameList1[i]["offName"].toLowerCase());
-      }
-    }
-
-    for(var i = 0; i < nameList2.length; i++){
-      if (nameList2[i]["name"].isNotEmpty) {
-        colNames.add(nameList2[i]["name"].toLowerCase());
-      }
-      if (nameList2[i]["capital"].isNotEmpty) {
-        capNames.add(nameList2[i]["capital"].toLowerCase());
-      }
-    }
-
-    generateLocationsList();
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrange,

@@ -16,6 +16,8 @@ List<String> capNames = [];
 
 List<String> continentsNames = ["asia", "europe", "north america", "oceania", "antarctica", "south america", "africa"];
 
+List<String> locations = [];
+
 List<String> playerMovesResults = [];
 int playerResult = 1;
 int turnCountResult = 1;
