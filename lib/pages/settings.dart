@@ -54,6 +54,13 @@ class _SettingsState extends State<Settings> {
                       onChanged: (bool value){
                         setState(() {
                            countries = value;
+                           if (countries && !colloquial && !official) {
+                             colloquial = true;
+                           }
+                           if (!countries) {
+                             colloquial = false;
+                             official = false;
+                           }
                         });
                       }
                     ),
@@ -166,7 +173,7 @@ class _SettingsState extends State<Settings> {
                 const Padding(
                   padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
                   child: Text(
-                    "Location Name Settings",
+                    "Country Name Settings",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 23.0,
@@ -203,6 +210,12 @@ class _SettingsState extends State<Settings> {
                         onChanged: (bool value){
                           setState(() {
                             colloquial = value;
+                            if (colloquial) {
+                              countries = true;
+                            }
+                            if (!colloquial && !official) {
+                              countries = false;
+                            }
                           });
                         }
                     ),
@@ -238,6 +251,12 @@ class _SettingsState extends State<Settings> {
                         onChanged: (bool value){
                           setState(() {
                             official = value;
+                            if (official) {
+                              countries = true;
+                            }
+                            if (!colloquial && !official) {
+                              countries = false;
+                            }
                           });
                         }
                     ),
