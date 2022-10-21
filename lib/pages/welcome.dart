@@ -112,10 +112,25 @@ class _WelcomeState extends State<Welcome> {
                     ],
                   ),
                 ),
-                const Image(
-                  image: AssetImage('assets/globe-spinning.gif'),
-                  width: 600.0,
-                  height: 400.0,
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    const Image(
+                      image: AssetImage('assets/globe-spinning.gif'),
+                      width: 600.0,
+                      height: 400.0,
+                    ),
+                    Opacity(
+                      opacity: 1.0,
+                      child: TextButton(
+                        onPressed: () {},
+                        onLongPress: () {
+                          Navigator.pushNamed(context, '/about');
+                        },
+                        child: const Text(""),
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
