@@ -28,17 +28,33 @@ class _PlayerState extends State<Player> {
   void generateLocationsList() {
     locations = [];
     if (capitals) {
-      locations.addAll(capNames);
+      for (var i = 0; i < capNames.length; i++){
+        if (!locations.contains(capNames[i])) {
+          locations.add(capNames[i]);
+        }
+      }
     }
     if (continents) {
-      locations.addAll(continentsNames);
+      for (var i = 0; i < continentsNames.length; i++){
+        if (!locations.contains(continentsNames[i])) {
+          locations.add(continentsNames[i]);
+        }
+      }
     }
     if (countries) {
       if (colloquial) {
-        locations.addAll(colNames);
+        for (var i = 0; i < colNames.length; i++){
+          if (!locations.contains(colNames[i])) {
+            locations.add(colNames[i]);
+          }
+        }
       }
       if (official) {
-        locations.addAll(offNames);
+        for (var i = 0; i < offNames.length; i++){
+          if (!locations.contains(offNames[i])) {
+            locations.add(offNames[i]);
+          }
+        }
       }
     }
   }
