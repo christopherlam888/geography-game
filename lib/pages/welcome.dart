@@ -26,6 +26,8 @@ class _WelcomeState extends State<Welcome> {
     setState((){
       nameList2 = data2["Col_Cap"];
     });
+    generateLists();
+    generateLocationsList();
   }
 
   void generateLists() {
@@ -138,8 +140,6 @@ class _WelcomeState extends State<Welcome> {
                     ElevatedButton(
                       onPressed: () {
                         readJson();
-                        generateLists();
-                        generateLocationsList();
                         Navigator.pushNamed(context, '/player');
                       },
                       style: ElevatedButton.styleFrom(
