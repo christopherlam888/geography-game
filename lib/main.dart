@@ -7,6 +7,7 @@ import 'pages/about.dart';
 import 'pages/win.dart';
 import 'pages/tie.dart';
 import 'pages/end.dart';
+import 'pages/mystery.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -21,6 +22,7 @@ void main() {
         '/win' : (context) => const Win(),
         '/tie' : (context) => const Tie(),
         '/end' : (context) => const End(),
+        '/mystery' : (context) => const Mystery(),
       }
   ));
 }

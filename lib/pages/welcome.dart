@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:geography_game/variables.dart';
+import 'package:geography_game/mystery_data.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key? key}) : super(key: key);
@@ -49,38 +50,26 @@ class _WelcomeState extends State<Welcome> {
     }
   }
 
+  void addList(bool category, List<String> categoryNames) {
+    if (category) {
+      for (var i = 0; i < categoryNames.length; i++){
+        if (!locations.contains(categoryNames[i])) {
+          locations.add(categoryNames[i]);
+        }
+      }
+    }
+  }
+
   void generateLocationsList() {
     locations = [];
-    if (capitals) {
-      for (var i = 0; i < capNames.length; i++){
-        if (!locations.contains(capNames[i])) {
-          locations.add(capNames[i]);
-        }
-      }
-    }
-    if (continents) {
-      for (var i = 0; i < continentsNames.length; i++){
-        if (!locations.contains(continentsNames[i])) {
-          locations.add(continentsNames[i]);
-        }
-      }
-    }
+    addList(capitals, capNames);
+    addList(continents, continentsNames);
     if (countries) {
-      if (colloquial) {
-        for (var i = 0; i < colNames.length; i++){
-          if (!locations.contains(colNames[i])) {
-            locations.add(colNames[i]);
-          }
-        }
-      }
-      if (official) {
-        for (var i = 0; i < offNames.length; i++){
-          if (!locations.contains(offNames[i])) {
-            locations.add(offNames[i]);
-          }
-        }
-      }
+      addList(colloquial, colNames);
+      addList(official, offNames);
     }
+    addList(canada, canadaNames);
+    addList(waterloo, waterlooNames);
   }
 
   @override
@@ -130,7 +119,7 @@ class _WelcomeState extends State<Welcome> {
                         child: TextButton(
                           onPressed: () {},
                           onLongPress: () {
-                            Navigator.pushNamed(context, '/about');
+                            Navigator.pushNamed(context, '/mystery');
                           },
                           child: const Text(""),
                         ),

@@ -48,6 +48,7 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 10.0),
                     Switch(
                       value: countries,
                       activeColor: Colors.deepOrange,
@@ -83,6 +84,7 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 10.0),
                     Switch(
                         value: capitals,
                         activeColor: Colors.deepOrange,
@@ -112,6 +114,7 @@ class _SettingsState extends State<Settings> {
                         ),
                       ),
                     ),
+                    const SizedBox(width: 10.0),
                     Switch(
                         value: continents,
                         activeColor: Colors.deepOrange,
@@ -215,6 +218,7 @@ class _SettingsState extends State<Settings> {
                         ],
                       ),
                     ),
+                    const SizedBox(width: 10.0),
                     Switch(
                         value: colloquial,
                         activeColor: Colors.deepOrange,
@@ -260,6 +264,7 @@ class _SettingsState extends State<Settings> {
                         ],
                       ),
                     ),
+                    const SizedBox(width: 10.0),
                     Switch(
                         value: official,
                         activeColor: Colors.deepOrange,
