@@ -14,6 +14,7 @@ class _PlayerState extends State<Player> {
 
   List<String> playerMoves = [];
   String lastLetter = "*";
+  String randomLetter = "*";
   List<String> playerMovesDisplay = [];
   int player = 1;
   int turnCount = 1;
@@ -21,6 +22,8 @@ class _PlayerState extends State<Player> {
   String errorMessage = "";
 
   bool pendingWin = false;
+
+  bool singleplayerWin = false;
 
   final scrollController = ScrollController();
   final nameGetter = TextEditingController();
@@ -34,9 +37,44 @@ class _PlayerState extends State<Player> {
     super.dispose();
   }
 
+  void generateRandomLetter() {
+    var random = Random();
+    int index = 0;
+    String firstLetter = "";
+    List<String> generatedRandomMoves = [];
+    bool movesLeft = false;
+    randomLetter = "-";
+    while (generatedRandomMoves.length != locations.length) {
+      index = random.nextInt(locations.length);
+      firstLetter = locations[index].substring(0,1);
+      if (!generatedRandomMoves.contains(locations[index])) {
+        generatedRandomMoves.add(locations[index]);
+        if (!playerMoves.contains(locations[index])) {
+          movesLeft = true;
+          if (!playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+            randomLetter = firstLetter;
+            return;
+          }
+        }
+      }
+    }
+    if (!movesLeft) {
+      if (mode == gamemode.two_player) {
+        setTie();
+      }
+      else {
+        String singleplayerLastMove = playerMoves[playerMoves.length-1];
+        if (playerMoves.length.isEven) {
+          playerMoves.removeLast();
+        }
+        singleplayerWin = true;
+        setWin(singleplayerLastMove);
+      }
+    }
+  }
+
   String generateRandomMove() {
     var random = Random();
-    bool correct = false;
     int index = 0;
     String firstLetter = "";
     List<String> generatedRandomMoves = [];
@@ -45,19 +83,12 @@ class _PlayerState extends State<Player> {
       firstLetter = locations[index].substring(0,1);
       if (!generatedRandomMoves.contains(locations[index])) {
         generatedRandomMoves.add(locations[index]);
-        if (!playerMoves.contains(locations[index]) && playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
-          correct = true;
+        if (!playerMoves.contains(locations[index]) && (playerMoves[playerMoves.length-1].endsWith(firstLetter) || firstLetter == randomLetter)) {
           break;
         }
       }
     }
-    if (correct == true) {
-      return locations[index];
-    }
-    else {
-      setWin(playerMoves[playerMoves.length-1]);
-      return "No more locations";
-    }
+    return locations[index];
   }
 
   void generateDisplay() {
@@ -82,6 +113,22 @@ class _PlayerState extends State<Player> {
     lastMove = toProperCase(move);
     Navigator.pop(context);
     Navigator.pushNamed(context, '/win');
+  }
+
+  void setTie() {
+    playerMovesResults = playerMoves;
+    playerMovesDisplayResults = playerMovesDisplay;
+    turnCountResult = turnCount;
+    Navigator.pop(context);
+    Navigator.pushNamed(context, '/tie');
+  }
+
+  void setEnd() {
+    playerMovesResults = playerMoves;
+    playerMovesDisplayResults = playerMovesDisplay;
+    turnCountResult = turnCount;
+    Navigator.pop(context);
+    Navigator.pushNamed(context, '/end');
   }
 
   @override
@@ -137,6 +184,26 @@ class _PlayerState extends State<Player> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: "Random Letter: ",
+                        children: [
+                          TextSpan(
+                            text: randomLetter.toUpperCase(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
 
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -171,26 +238,26 @@ class _PlayerState extends State<Player> {
                           ElevatedButton(
                               onPressed: () {
                                 setState(() {
-                                  if (mode == gamemode.two_player) {
-                                    String move = nameGetter.text.toString().trim().toLowerCase();
-                                    if (locations.contains(move)){
-                                      if (!playerMoves.contains(move)) {
-                                        String firstLetter = move.substring(0,1);
-                                        if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
+                                  String move = nameGetter.text.toString().trim().toLowerCase();
+                                  if (locations.contains(move)) {
+                                    if (!playerMoves.contains(move)) {
+                                      String firstLetter = move.substring(0,1);
+                                      if (mode == gamemode.two_player) {
+                                        if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter) || firstLetter == randomLetter)) {
                                           errorMessage = "";
                                           if (pendingWin) {
                                             turnCount++;
                                             setWin(move);
-
                                           }
                                           else {
                                             playerMoves.add(move);
                                             lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
                                             generateDisplay();
                                             player = 2;
+                                            generateRandomLetter();
                                           }
                                         }
-                                        else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
+                                        else if (playerMoves[playerMoves.length-1].endsWith(firstLetter) || firstLetter == randomLetter){
                                           errorMessage = "";
                                           if (pendingWin) {
                                             setWin(move);
@@ -201,56 +268,39 @@ class _PlayerState extends State<Player> {
                                             generateDisplay();
                                             turnCount++;
                                             player = 1;
+                                            generateRandomLetter();
                                           }
                                         }
                                         else {
-                                          errorMessage = "Incorrect First Letter!";
+                                          errorMessage = "Incorrect first letter!";
                                         }
                                       }
                                       else {
-                                        errorMessage = "Already played!";
+                                        if (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter) || firstLetter == randomLetter) {
+                                          errorMessage = "";
+                                          playerMoves.add(move);
+                                          generateRandomLetter();
+                                          playerMoves.add(generateRandomMove());
+                                          if (!singleplayerWin) {
+                                            lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
+                                            generateDisplay();
+                                            turnCount++;
+                                            generateRandomLetter();
+                                          }
+                                        }
+                                        else {
+                                          errorMessage = "Incorrect first letter!";
+                                        }
                                       }
                                     }
                                     else {
-                                      errorMessage = "Not a valid location!";
+                                      errorMessage = "Already played!";
                                     }
-                                    nameGetter.clear();
                                   }
                                   else {
-                                    if (player == 1) {
-                                      String move = nameGetter.text.toString().trim().toLowerCase();
-                                      if (locations.contains(move)) {
-                                        if (!playerMoves.contains(move)) {
-                                          String firstLetter = move.substring(0,1);
-                                          if (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
-                                            errorMessage = "";
-                                            if (pendingWin) {
-                                              turnCount++;
-                                              setWin(move);
-
-                                            }
-                                            else {
-                                              playerMoves.add(move);
-                                              playerMoves.add(generateRandomMove());
-                                              lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
-                                              generateDisplay();
-                                              turnCount++;
-                                            }
-                                          }
-                                          else {
-                                            errorMessage = "Incorrect first letter!";
-                                          }
-                                        }
-                                        else {
-                                          errorMessage = "Already played!";
-                                        }
-                                      }
-                                      else {
-                                        errorMessage = "Not a valid location!";
-                                      }
-                                      nameGetter.clear();
-                                    }
+                                    errorMessage = "Not a valid location!";
                                   }
+                                  nameGetter.clear();
                                });
                               },
                               style: ElevatedButton.styleFrom(
@@ -286,11 +336,7 @@ class _PlayerState extends State<Player> {
                                   }
                                   else {
                                     nameGetter.clear();
-                                    playerMovesResults = playerMoves;
-                                    playerMovesDisplayResults = playerMovesDisplay;
-                                    turnCountResult = turnCount;
-                                    Navigator.pop(context);
-                                    Navigator.pushNamed(context, '/tie');
+                                    setTie();
                                   }
                                 }
                                 else {
@@ -300,11 +346,7 @@ class _PlayerState extends State<Player> {
                                   }
                                   else {
                                     nameGetter.clear();
-                                    playerMovesResults = playerMoves;
-                                    playerMovesDisplayResults = playerMovesDisplay;
-                                    turnCountResult = turnCount;
-                                    Navigator.pop(context);
-                                    Navigator.pushNamed(context, '/end');
+                                    setEnd();
                                   }
                                 }
                               });

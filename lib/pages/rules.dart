@@ -50,14 +50,15 @@ class _RulesState extends State<Rules> {
                             "Geography Game is made as a simple test of geography knowledge.\n\n"
                                 "1. Begin by typing in the name of any present-day geographical location. "
                                 "It can be a country, capital city, or continent depending on your settings.\n\n"
-                                "2. Pass the phone to your friend to enter another location."
-                                "If you are playing with the computer, the location will be automatically generated.\n\n"
-                                "3. The first letter of a location entered must be the same as the last letter of the "
-                                "previous location entered. \n\n"
+                                "2. Pass the phone to your friend to enter another location. "
+                                "If you are playing in single player mode, the location will be automatically generated.\n\n"
+                                "3. The first letter of a location entered must be the same as either the last letter of the "
+                                "previous location entered or the randomly-generated letter. \n\n"
                                 "4. Location names cannot be repeated.\n\n"
-                                "5. Alternate entering locations until either player can no longer think of any more locations.\n\n"
+                                "5. Take turns entering locations until either player can no longer think of any more locations.\n\n"
                                 "6. To win, the other player must enter a final location that follows all the previous rules.\n\n"
-                                "7. If the other player also cannot think of a location name, then the game ends in a tie.",
+                                "7. If the other player also cannot think of a location, then the game ends in a tie.\n\n"
+                                "8. In the event that all possible locations are played, two players tie and a single player wins.",
                         textDirection: TextDirection.ltr,
                         textAlign: TextAlign.left,
                           style: TextStyle(

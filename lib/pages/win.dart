@@ -59,7 +59,7 @@ class _WinState extends State<Win> {
                       "Last Move: $lastMove",
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: playerResult.isOdd ? Colors.red[400] : Colors.blue[400],
+                        color: mode == gamemode.two_player ? (playerResult.isOdd ? Colors.red[400] : Colors.blue[400]) : (playerMovesResults.length.isEven ? Colors.red[400] : Colors.blue[400]),
                       ),
                     ),
                     const Padding(
