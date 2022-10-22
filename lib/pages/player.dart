@@ -13,6 +13,7 @@ class Player extends StatefulWidget {
 class _PlayerState extends State<Player> {
 
   List<String> playerMoves = [];
+  String lastLetter = "*";
   List<String> playerMovesDisplay = [];
   int player = 1;
   int turnCount = 1;
@@ -116,6 +117,26 @@ class _PlayerState extends State<Player> {
                         fontSize: 20.0,
                       ),
                     ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: "Last Letter: ",
+                        children: [
+                          TextSpan(
+                            text: lastLetter,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                        style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
 
                     Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -164,6 +185,7 @@ class _PlayerState extends State<Player> {
                                           }
                                           else {
                                             playerMoves.add(move);
+                                            lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
                                             generateDisplay();
                                             player = 2;
                                           }
@@ -175,6 +197,7 @@ class _PlayerState extends State<Player> {
                                           }
                                           else {
                                             playerMoves.add(move);
+                                            lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
                                             generateDisplay();
                                             turnCount++;
                                             player = 1;
@@ -209,6 +232,7 @@ class _PlayerState extends State<Player> {
                                             else {
                                               playerMoves.add(move);
                                               playerMoves.add(generateRandomMove());
+                                              lastLetter = playerMoves[playerMoves.length-1].substring(playerMoves[playerMoves.length-1].length-1).toUpperCase();
                                               generateDisplay();
                                               turnCount++;
                                             }

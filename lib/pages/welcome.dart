@@ -110,6 +110,7 @@ class _WelcomeState extends State<Welcome> {
                         "WELCOME!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
+                          color: Colors.deepOrange,
                           fontWeight: FontWeight.bold,
                           fontSize: 50.0,
                         ),
