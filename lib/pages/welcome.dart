@@ -95,12 +95,15 @@ class _WelcomeState extends State<Welcome> {
         color: Colors.orange[200],
         child: ListView(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 100.0),
-                  child: Row(
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(
+                    height: 80.0,
+                  ),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
@@ -113,53 +116,57 @@ class _WelcomeState extends State<Welcome> {
                       ),
                     ],
                   ),
-                ),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    const Image(
-                      image: AssetImage('assets/globe-spinning.gif'),
-                      width: 600.0,
-                      height: 400.0,
-                    ),
-                    Opacity(
-                      opacity: 1.0,
-                      child: TextButton(
-                        onPressed: () {},
-                        onLongPress: () {
-                          Navigator.pushNamed(context, '/about');
-                        },
-                        child: const Text(""),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      const Image(
+                        image: AssetImage('assets/globe-spinning.gif'),
+                        width: 600.0,
+                        height: 400.0,
                       ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        readJson();
-                        Navigator.pushNamed(context, '/player');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.amber[900],
-                        side: const BorderSide(color: Colors.deepOrange, width: 4),
-                        elevation: 10,
-                        shadowColor: Colors.amber,
-                      ),
-
-                      child: const Text(
-                        "Start Game",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20.0,
+                      Opacity(
+                        opacity: 1.0,
+                        child: TextButton(
+                          onPressed: () {},
+                          onLongPress: () {
+                            Navigator.pushNamed(context, '/about');
+                          },
+                          child: const Text(""),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 80,
+                        width: 240,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            readJson();
+                            Navigator.pushNamed(context, '/player');
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.amber[900],
+                            side: const BorderSide(color: Colors.deepOrange, width: 4),
+                            elevation: 10,
+                            shadowColor: Colors.amber,
+                          ),
+
+                          child: const Text(
+                            "Start Game",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

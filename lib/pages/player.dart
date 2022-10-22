@@ -315,49 +315,54 @@ class _PlayerState extends State<Player> {
                         "Moves Played",
                         style: TextStyle(
                           fontSize: 20.0,
-                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ),
 
                     SizedBox(
-                      height: 330,
-                      width: 240,
+                      height: 340,
+                      width: 260,
                       child: Scrollbar(
                         thumbVisibility: true,
                         controller: scrollController,
                         radius: const Radius.circular(2.5),
                         thickness: 5.0,
-                        child: CustomScrollView(
-                          controller: scrollController,
-                          slivers: <Widget> [
-                            SliverGrid(
-                              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 120,
-                                mainAxisSpacing: 1.5,
-                                crossAxisSpacing: 1.5,
-                                childAspectRatio: 3.0,
-                              ),
-                              delegate: SliverChildBuilderDelegate(
-                                  (BuildContext context, int index) {
-                                    return Container(
-                                      alignment: Alignment.center,
-                                      color: index.isEven ? Colors.red[400] : Colors.blue[400],
-                                      child: SingleChildScrollView(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Text(
-                                            toProperCase(playerMovesDisplay[index]),
-                                            textAlign: TextAlign.center,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                          child: CustomScrollView(
+                            controller: scrollController,
+                            slivers: <Widget> [
+                              SliverGrid(
+                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 118.5,
+                                  mainAxisSpacing: 3.0,
+                                  crossAxisSpacing: 3.0,
+                                  childAspectRatio: 3.0,
+                                ),
+                                delegate: SliverChildBuilderDelegate(
+                                    (BuildContext context, int index) {
+                                      return Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                                          color: index.isEven ? Colors.red[400] : Colors.blue[400],
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: SingleChildScrollView(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(
+                                              toProperCase(playerMovesDisplay[index]),
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    );
-                                  },
-                                childCount: playerMovesDisplay.length,
+                                      );
+                                    },
+                                  childCount: playerMovesDisplay.length,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

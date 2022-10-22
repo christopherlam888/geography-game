@@ -33,11 +33,11 @@ class _AboutState extends State<About> {
       ),
       body: Container(
         color: Colors.orange[200],
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: ListView(
-            children: [
-              Center(
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
                 child: Column(
                   children: [
                     const Image(
@@ -99,8 +99,8 @@ class _AboutState extends State<About> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
