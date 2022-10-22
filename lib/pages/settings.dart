@@ -54,6 +54,9 @@ class _SettingsState extends State<Settings> {
                       onChanged: (bool value){
                         setState(() {
                            countries = value;
+                           if (!countries && !capitals && !continents) {
+                             countries = true;
+                           }
                            if (countries && !colloquial && !official) {
                              colloquial = true;
                            }
@@ -86,6 +89,10 @@ class _SettingsState extends State<Settings> {
                         onChanged: (bool value){
                           setState(() {
                             capitals = value;
+                            if (!countries && !capitals && !continents) {
+                              countries = true;
+                              colloquial = true;
+                            }
                           });
                         }
                     ),
@@ -111,6 +118,10 @@ class _SettingsState extends State<Settings> {
                         onChanged: (bool value){
                           setState(() {
                             continents = value;
+                            if (!countries && !capitals && !continents) {
+                              countries = true;
+                              colloquial = true;
+                            }
                           });
                         }
                     ),
@@ -216,6 +227,10 @@ class _SettingsState extends State<Settings> {
                             if (!colloquial && !official) {
                               countries = false;
                             }
+                            if (!countries && !capitals && !continents) {
+                              countries = true;
+                              colloquial = true;
+                            }
                           });
                         }
                     ),
@@ -256,6 +271,10 @@ class _SettingsState extends State<Settings> {
                             }
                             if (!colloquial && !official) {
                               countries = false;
+                            }
+                            if (!countries && !capitals && !continents) {
+                              countries = true;
+                              colloquial = true;
                             }
                           });
                         }

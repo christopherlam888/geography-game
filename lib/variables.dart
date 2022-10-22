@@ -19,6 +19,7 @@ List<String> continentsNames = ["asia", "europe", "north america", "oceania", "a
 List<String> locations = [];
 
 List<String> playerMovesResults = [];
+List<String> playerMovesDisplayResults = [];
 int playerResult = 1;
 int turnCountResult = 1;
 String lastMove = "";

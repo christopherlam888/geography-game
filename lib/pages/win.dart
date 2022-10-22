@@ -98,16 +98,16 @@ class _WinState extends State<Win> {
                                     color: index.isEven ? Colors.red[400] : Colors.blue[400],
                                     child: SingleChildScrollView(
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 5.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Text(
-                                          toProperCase(playerMovesResults[index]),
+                                          toProperCase(playerMovesDisplayResults[index]),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
                                     ),
                                   );
                                 },
-                                childCount: playerMovesResults.length,
+                                childCount: playerMovesDisplayResults.length,
                               ),
                             ),
                           ],

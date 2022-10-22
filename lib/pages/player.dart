@@ -13,6 +13,7 @@ class Player extends StatefulWidget {
 class _PlayerState extends State<Player> {
 
   List<String> playerMoves = [];
+  List<String> playerMovesDisplay = [];
   int player = 1;
   int turnCount = 1;
 
@@ -58,8 +59,23 @@ class _PlayerState extends State<Player> {
     }
   }
 
+  void generateDisplay() {
+    playerMovesDisplay = [];
+    if (playerMoves.length.isOdd) {
+      playerMoves.add("...");
+    }
+    for (var i = playerMoves.length-1; i > 0; i-=2) {
+      playerMovesDisplay.add(playerMoves[i-1]);
+      playerMovesDisplay.add(playerMoves[i]);
+    }
+    if (playerMoves.length.isEven) {
+      playerMoves.remove("...");
+    }
+  }
+
   void setWin(String move){
     playerMovesResults = playerMoves;
+    playerMovesDisplayResults = playerMovesDisplay;
     playerResult = player;
     turnCountResult = turnCount;
     lastMove = toProperCase(move);
@@ -136,46 +152,10 @@ class _PlayerState extends State<Player> {
                                 setState(() {
                                   if (mode == gamemode.two_player) {
                                     String move = nameGetter.text.toString().trim().toLowerCase();
-                                    if (locations.contains(move) && !playerMoves.contains(move)){
-                                      String firstLetter = move.substring(0,1);
-                                      if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
-                                        errorMessage = "";
-                                        if (pendingWin) {
-                                          turnCount++;
-                                          setWin(move);
-
-                                        }
-                                        else {
-                                          playerMoves.add(move);
-                                          player = 2;
-                                        }
-                                      }
-                                      else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
-                                        errorMessage = "";
-                                        if (pendingWin) {
-                                          setWin(move);
-                                        }
-                                        else {
-                                          playerMoves.add(move);
-                                          turnCount++;
-                                          player = 1;
-                                        }
-                                      }
-                                      else {
-                                        errorMessage = "Try Again!";
-                                      }
-                                    }
-                                    else{
-                                      errorMessage = "Try Again!";
-                                    }
-                                    nameGetter.clear();
-                                  }
-                                  else {
-                                    if (player == 1) {
-                                      String move = nameGetter.text.toString().trim().toLowerCase();
-                                      if (locations.contains(move) && !playerMoves.contains(move)) {
+                                    if (locations.contains(move)){
+                                      if (!playerMoves.contains(move)) {
                                         String firstLetter = move.substring(0,1);
-                                        if (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+                                        if ((player == 1) && (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter))) {
                                           errorMessage = "";
                                           if (pendingWin) {
                                             turnCount++;
@@ -184,16 +164,65 @@ class _PlayerState extends State<Player> {
                                           }
                                           else {
                                             playerMoves.add(move);
-                                            playerMoves.add(generateRandomMove());
+                                            generateDisplay();
+                                            player = 2;
+                                          }
+                                        }
+                                        else if (playerMoves[playerMoves.length-1].endsWith(firstLetter)){
+                                          errorMessage = "";
+                                          if (pendingWin) {
+                                            setWin(move);
+                                          }
+                                          else {
+                                            playerMoves.add(move);
+                                            generateDisplay();
                                             turnCount++;
+                                            player = 1;
                                           }
                                         }
                                         else {
-                                          errorMessage = "Try Again!";
+                                          errorMessage = "Incorrect First Letter!";
                                         }
                                       }
                                       else {
-                                        errorMessage = "Try Again!";
+                                        errorMessage = "Already played!";
+                                      }
+                                    }
+                                    else {
+                                      errorMessage = "Not a valid location!";
+                                    }
+                                    nameGetter.clear();
+                                  }
+                                  else {
+                                    if (player == 1) {
+                                      String move = nameGetter.text.toString().trim().toLowerCase();
+                                      if (locations.contains(move)) {
+                                        if (!playerMoves.contains(move)) {
+                                          String firstLetter = move.substring(0,1);
+                                          if (playerMoves.isEmpty || playerMoves[playerMoves.length-1].endsWith(firstLetter)) {
+                                            errorMessage = "";
+                                            if (pendingWin) {
+                                              turnCount++;
+                                              setWin(move);
+
+                                            }
+                                            else {
+                                              playerMoves.add(move);
+                                              playerMoves.add(generateRandomMove());
+                                              generateDisplay();
+                                              turnCount++;
+                                            }
+                                          }
+                                          else {
+                                            errorMessage = "Incorrect first letter!";
+                                          }
+                                        }
+                                        else {
+                                          errorMessage = "Already played!";
+                                        }
+                                      }
+                                      else {
+                                        errorMessage = "Not a valid location!";
                                       }
                                       nameGetter.clear();
                                     }
@@ -234,6 +263,7 @@ class _PlayerState extends State<Player> {
                                   else {
                                     nameGetter.clear();
                                     playerMovesResults = playerMoves;
+                                    playerMovesDisplayResults = playerMovesDisplay;
                                     turnCountResult = turnCount;
                                     Navigator.pop(context);
                                     Navigator.pushNamed(context, '/tie');
@@ -247,6 +277,7 @@ class _PlayerState extends State<Player> {
                                   else {
                                     nameGetter.clear();
                                     playerMovesResults = playerMoves;
+                                    playerMovesDisplayResults = playerMovesDisplay;
                                     turnCountResult = turnCount;
                                     Navigator.pop(context);
                                     Navigator.pushNamed(context, '/end');
@@ -314,16 +345,16 @@ class _PlayerState extends State<Player> {
                                       color: index.isEven ? Colors.red[400] : Colors.blue[400],
                                       child: SingleChildScrollView(
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 5.0),
+                                          padding: const EdgeInsets.all(5.0),
                                           child: Text(
-                                            toProperCase(playerMoves[index]),
+                                            toProperCase(playerMovesDisplay[index]),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
                                     );
                                   },
-                                childCount: playerMoves.length,
+                                childCount: playerMovesDisplay.length,
                               ),
                             ),
                           ],
