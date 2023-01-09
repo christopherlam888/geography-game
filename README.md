@@ -30,6 +30,7 @@ Screenshots:
 
 Features to implement:
 - Display list of possible moves at game win, tie, and end
+- Improve UI/UX
 
 ***
 
