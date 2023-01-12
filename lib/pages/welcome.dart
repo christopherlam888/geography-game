@@ -90,7 +90,7 @@ class _WelcomeState extends State<Welcome> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(
-                    height: 80.0,
+                    height: 50.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +101,7 @@ class _WelcomeState extends State<Welcome> {
                         style: TextStyle(
                           color: Colors.deepOrange,
                           fontWeight: FontWeight.bold,
-                          fontSize: 50.0,
+                          fontSize: 60.0,
                         ),
                       ),
                     ],
@@ -139,9 +139,7 @@ class _WelcomeState extends State<Welcome> {
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.amber[900],
-                            side: const BorderSide(color: Colors.deepOrange, width: 4),
-                            elevation: 10,
-                            shadowColor: Colors.amber,
+                            side: const BorderSide(color: Colors.deepOrange, width: 8),
                           ),
 
                           child: const Text(
