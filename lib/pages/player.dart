@@ -131,6 +131,71 @@ class _PlayerState extends State<Player> {
     Navigator.pushNamed(context, '/end');
   }
 
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Are you sure?"),
+          content: const Text("This action cannot be undone"),
+          backgroundColor: Colors.orange[200],
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+              ),
+              child: const Text(
+                "No",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context).pop();
+                  if (mode == gamemode.two_player) {
+                    if (pendingWin == false) {
+                      nameGetter.clear();
+                      pendingWin = true;
+                      if (player == 1) {
+                        player = 2;
+                      }
+                      else {
+                        player = 1;
+                      }
+                    }
+                    else {
+                      setTie();
+                    }
+                  }
+                  else {
+                    setEnd();
+                  }
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+              ),
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 15.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -236,6 +301,50 @@ class _PlayerState extends State<Player> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                if (mode == gamemode.two_player) {
+                                  if (pendingWin == false) {
+                                    if (playerMoves.isEmpty) {
+                                      errorMessage = "Enter any location!";
+                                      nameGetter.clear();
+                                    }
+                                    else if (player == 1) {
+                                      _showDialog();
+                                    }
+                                    else {
+                                      _showDialog();
+                                    }
+                                  }
+                                  else {
+                                    nameGetter.clear();
+                                    _showDialog();
+                                  }
+                                }
+                                else {
+                                  if (playerMoves.isEmpty) {
+                                    errorMessage = "Enter any location!";
+                                    nameGetter.clear();
+                                  }
+                                  else {
+                                    nameGetter.clear();
+                                    _showDialog();
+                                  }
+                                }
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
+                            child: const Text(
+                              "Give Up",
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
                               onPressed: () {
                                 setState(() {
                                   String move = nameGetter.text.toString().trim().toLowerCase();
@@ -313,54 +422,6 @@ class _PlayerState extends State<Player> {
                                   fontSize: 20.0,
                                 ),
                               ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                if (mode == gamemode.two_player) {
-                                  if (pendingWin == false) {
-                                    if (playerMoves.isEmpty) {
-                                      errorMessage = "Enter any location!";
-                                      nameGetter.clear();
-                                    }
-                                    else if (player == 1) {
-                                      player = 2;
-                                      nameGetter.clear();
-                                      pendingWin = true;
-                                    }
-                                    else {
-                                      player = 1;
-                                      nameGetter.clear();
-                                      pendingWin = true;
-                                    }
-                                  }
-                                  else {
-                                    nameGetter.clear();
-                                    setTie();
-                                  }
-                                }
-                                else {
-                                  if (playerMoves.isEmpty) {
-                                    errorMessage = "Enter any location!";
-                                    nameGetter.clear();
-                                  }
-                                  else {
-                                    nameGetter.clear();
-                                    setEnd();
-                                  }
-                                }
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                            ),
-                            child: const Text(
-                              "Give Up",
-                              style: TextStyle(
-                                fontSize: 15.0,
-                                color: Colors.white,
-                              ),
-                            ),
                           ),
                         ],
                       ),
