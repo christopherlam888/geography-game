@@ -1,37 +1,34 @@
-# Geography Game
+<p align="center"><img src="assets/globe-spinning.gif" width="150"></a></p> 
+<h2 align="center"><b>Geography Game</b></h2>
+<h4 align="center">A simple game to test your knowledge of geography.</h4>
 
-A simple game to test your knowledge of geography. Name countries, capitals, and continents.
+<p align="center">
+<img src="https://img.shields.io/github/languages/top/christopherlam888/geography-game.svg" >
+<a href="https://github.com/christopherlam888/geography-game/releases" alt="GitHub release"><img src="https://img.shields.io/github/release/christopherlam888/geography-game.svg" ></a>
+<img src="https://img.shields.io/github/downloads/christopherlam888/geography-game/total.svg" >
+<a href="https://www.gnu.org/licenses/gpl-3.0" alt="License: GPLv3"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg"></a>
+</p>
 
-Read the Rules page in-app to learn how to play.
+## Features
 
-Change your game settings to choose whether to include countries, capitals, and/or continents as well as colloquial and/or official names.
+- Name countries, capitals, and continents.
+- Read the Rules page in-app to learn how to play.
+- Change your game settings to choose whether to include countries, capitals, and/or continents as well as colloquial and/or official names.
+- Single-player and two-player gamemodes.
 
-Single-player and two-player gamemodes.
+## Screenshots
 
-***
+<img src="https://user-images.githubusercontent.com/85356197/212111749-41677ced-94ab-4593-bea4-7db46903ea6c.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212111764-76153ecf-1092-4802-bf98-5beb0157f1d9.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212112839-21bdee3e-508c-4950-930f-b73d9afe38f7.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212112846-38449ad0-ec49-4675-b253-2d011fb41ff9.png" width=200>
 
-Screenshots: 
+<img src="https://user-images.githubusercontent.com/85356197/212111900-fe769f0d-28cc-4fd5-bbad-51874dde584b.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212111910-7fa00c25-cbc1-44bf-bb48-6df3e5464bf6.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212111923-e8bff705-f530-4c29-8ccc-008afffd2f4d.png" width=200> <img src="https://user-images.githubusercontent.com/85356197/212112923-6dcbe885-4b7a-43c7-a617-a78c13fe3e58.png" width=200>
 
-![Geography Game 1](https://user-images.githubusercontent.com/85356197/197373130-0bc7833d-17f1-4cd3-8745-bd44c98881a5.png)
+## Features To Implement
 
-![Geography Game 2](https://user-images.githubusercontent.com/85356197/197373131-8eb4f8eb-0d82-42c6-88bd-9e4e67607b37.png)
-
-![Geography Game 3](https://user-images.githubusercontent.com/85356197/197373134-bf7c49ba-2b51-420f-8965-f408e33d8416.png)
-
-![Geography Game 4](https://user-images.githubusercontent.com/85356197/197373135-2c44cf23-c583-4bd1-9c5e-3fbb784ca364.png)
-
-![Geography Game 5](https://user-images.githubusercontent.com/85356197/197373137-86aa08eb-0106-4458-9f2c-3eb05d71c816.png)
-
-![Geography Game 6](https://user-images.githubusercontent.com/85356197/197373141-548bcfa5-938d-4f14-88ab-8170a64f1fbd.png)
-
-![Geography Game 7](https://user-images.githubusercontent.com/85356197/197373146-10952fbf-fedd-4518-adf7-011278142e46.png)
-
-***
-
-Features to implement:
+- Improve input validation
 - Display list of possible moves at game win, tie, and end
 - Improve UI/UX
 
-***
+## License
+[![GNU GPLv3 Image](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
 This project is licensed under the GNU General Public License v3.0.
