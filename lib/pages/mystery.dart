@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geography_game/mystery_data.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Mystery extends StatefulWidget {
   const Mystery({Key? key}) : super(key: key);
@@ -9,6 +10,17 @@ class Mystery extends StatefulWidget {
 }
 
 class _MysteryState extends State<Mystery> {
+  late SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    initSharedPreferences();
+    super.initState();
+  }
+
+  initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +63,9 @@ class _MysteryState extends State<Mystery> {
                               ),
                             ),
                           ),
+                          SizedBox(width: 200.0, child: Text("e.g. Toronto")),
                           SizedBox(
-                              width: 200.0,
-                              child: Text("e.g. Toronto")),
-                          SizedBox(
-                              width: 200.0,
-                              child: Text("e.g. Whitehorse")),
+                              width: 200.0, child: Text("e.g. Whitehorse")),
                         ],
                       ),
                     ),
@@ -64,12 +73,12 @@ class _MysteryState extends State<Mystery> {
                     Switch(
                         value: canada,
                         activeColor: Colors.deepOrange,
-                        onChanged: (bool value){
+                        onChanged: (bool value) {
                           setState(() {
                             canada = value;
+                            sharedPreferences.setBool('canada', canada);
                           });
-                        }
-                    ),
+                        }),
                   ],
                 ),
                 Row(
@@ -102,15 +111,14 @@ class _MysteryState extends State<Mystery> {
                     Switch(
                         value: waterloo,
                         activeColor: Colors.deepOrange,
-                        onChanged: (bool value){
+                        onChanged: (bool value) {
                           setState(() {
                             waterloo = value;
+                            sharedPreferences.setBool('waterloo', waterloo);
                           });
-                        }
-                    ),
+                        }),
                   ],
                 ),
-
               ],
             ),
           ],

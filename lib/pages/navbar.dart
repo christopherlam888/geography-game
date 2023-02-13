@@ -17,7 +17,9 @@ class NavBar extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            onTap: () {Navigator.pushNamed(context, '/rules');},
+            onTap: () {
+              Navigator.pushNamed(context, '/rules');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.settings, color: Colors.black),
@@ -27,7 +29,9 @@ class NavBar extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            onTap: () {Navigator.pushNamed(context, '/settings');},
+            onTap: () {
+              Navigator.pushNamed(context, '/settings');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.info, color: Colors.black),
@@ -37,7 +41,9 @@ class NavBar extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            onTap: () {Navigator.pushNamed(context, '/about');},
+            onTap: () {
+              Navigator.pushNamed(context, '/about');
+            },
           ),
         ],
       ),

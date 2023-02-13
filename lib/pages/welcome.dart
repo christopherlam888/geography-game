@@ -1,4 +1,6 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'navbar.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -14,6 +16,29 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
+  late SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    initSharedPreferences();
+    super.initState();
+  }
+
+  initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    loadData();
+  }
+
+  void loadData() {
+    countries = sharedPreferences.getBool('countries')!;
+    capitals = sharedPreferences.getBool('capitals')!;
+    continents = sharedPreferences.getBool('continents')!;
+    colloquial = sharedPreferences.getBool('colloquial')!;
+    official = sharedPreferences.getBool('official')!;
+    mode = EnumToString.fromString(
+        gamemode.values, sharedPreferences.getString('mode')!);
+    setState(() {});
+  }
 
   Future<void> readJson() async {
     String response = await rootBundle.loadString('assets/Official.json');
@@ -24,7 +49,7 @@ class _WelcomeState extends State<Welcome> {
 
     response = await rootBundle.loadString('assets/Capitals_Countries.json');
     final data2 = await json.decode(response);
-    setState((){
+    setState(() {
       nameList2 = data2["Col_Cap"];
     });
     generateLists();
@@ -40,7 +65,7 @@ class _WelcomeState extends State<Welcome> {
         offNames.add(nameList1[i]["offName"].toLowerCase());
       }
     }
-    for(var i = 0; i < nameList2.length; i++){
+    for (var i = 0; i < nameList2.length; i++) {
       if (nameList2[i]["name"].isNotEmpty) {
         colNames.add(nameList2[i]["name"].toLowerCase());
       }
@@ -52,7 +77,7 @@ class _WelcomeState extends State<Welcome> {
 
   void addList(bool category, List<String> categoryNames) {
     if (category) {
-      for (var i = 0; i < categoryNames.length; i++){
+      for (var i = 0; i < categoryNames.length; i++) {
         if (!locations.contains(categoryNames[i])) {
           locations.add(categoryNames[i]);
         }
@@ -139,9 +164,9 @@ class _WelcomeState extends State<Welcome> {
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.amber[900],
-                            side: const BorderSide(color: Colors.deepOrange, width: 8),
+                            side: const BorderSide(
+                                color: Colors.deepOrange, width: 8),
                           ),
-
                           child: const Text(
                             "Start Game",
                             style: TextStyle(

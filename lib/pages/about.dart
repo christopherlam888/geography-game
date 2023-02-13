@@ -9,7 +9,6 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
-
   Future<void>? _launched;
 
   Future<void> _launchInBrowser(Uri url) async {
@@ -23,8 +22,10 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-
-    final Uri toLaunch = Uri(scheme: 'https', host: 'github.com', path: 'christopherlam888/geography-game');
+    final Uri toLaunch = Uri(
+        scheme: 'https',
+        host: 'github.com',
+        path: 'christopherlam888/geography-game');
 
     return Scaffold(
       appBar: AppBar(

@@ -10,7 +10,6 @@ class Win extends StatefulWidget {
 }
 
 class _WinState extends State<Win> {
-
   final winScrollController = ScrollController();
 
   @override
@@ -43,7 +42,9 @@ class _WinState extends State<Win> {
                       "Player $playerResult",
                       style: TextStyle(
                         fontSize: 30.0,
-                        color: playerResult.isOdd ? Colors.red[400] : Colors.blue[400],
+                        color: playerResult.isOdd
+                            ? Colors.red[400]
+                            : Colors.blue[400],
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -59,7 +60,13 @@ class _WinState extends State<Win> {
                       "Last Move: $lastMove",
                       style: TextStyle(
                         fontSize: 20.0,
-                        color: mode == gamemode.two_player ? (playerResult.isOdd ? Colors.red[400] : Colors.blue[400]) : (playerMovesResults.length.isEven ? Colors.red[400] : Colors.blue[400]),
+                        color: mode == gamemode.two_player
+                            ? (playerResult.isOdd
+                                ? Colors.red[400]
+                                : Colors.blue[400])
+                            : (playerMovesResults.length.isEven
+                                ? Colors.red[400]
+                                : Colors.blue[400]),
                       ),
                     ),
                     const Padding(
@@ -72,7 +79,6 @@ class _WinState extends State<Win> {
                         ),
                       ),
                     ),
-
                     SizedBox(
                       height: 340,
                       width: 260,
@@ -82,30 +88,37 @@ class _WinState extends State<Win> {
                         radius: const Radius.circular(2.5),
                         thickness: 5.0,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0.0, horizontal: 10.0),
                           child: CustomScrollView(
                             controller: winScrollController,
-                            slivers: <Widget> [
+                            slivers: <Widget>[
                               SliverGrid(
-                                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                gridDelegate:
+                                    const SliverGridDelegateWithMaxCrossAxisExtent(
                                   maxCrossAxisExtent: 118.5,
                                   mainAxisSpacing: 3.0,
                                   crossAxisSpacing: 3.0,
                                   childAspectRatio: 3.0,
                                 ),
                                 delegate: SliverChildBuilderDelegate(
-                                      (BuildContext context, int index) {
+                                  (BuildContext context, int index) {
                                     return Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                                        color: index.isEven ? Colors.red[400] : Colors.blue[400],
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(5.0)),
+                                        color: index.isEven
+                                            ? Colors.red[400]
+                                            : Colors.blue[400],
                                       ),
                                       alignment: Alignment.center,
                                       child: SingleChildScrollView(
                                         child: Padding(
                                           padding: const EdgeInsets.all(5.0),
                                           child: Text(
-                                            toProperCase(playerMovesDisplayResults[index]),
+                                            toProperCase(
+                                                playerMovesDisplayResults[
+                                                    index]),
                                             textAlign: TextAlign.center,
                                           ),
                                         ),

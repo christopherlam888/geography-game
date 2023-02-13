@@ -14,15 +14,14 @@ void main() {
       debugShowCheckedModeBanner: false,
       initialRoute: '/welcome',
       routes: {
-        '/welcome' : (context) => const Welcome(),
-        '/player' : (context) => const Player(),
-        '/rules' : (context) => const Rules(),
-        '/settings' : (context) => const Settings(),
-        '/about' : (context) => const About(),
-        '/win' : (context) => const Win(),
-        '/tie' : (context) => const Tie(),
-        '/end' : (context) => const End(),
-        '/mystery' : (context) => const Mystery(),
-      }
-  ));
+        '/welcome': (context) => const Welcome(),
+        '/player': (context) => const Player(),
+        '/rules': (context) => const Rules(),
+        '/settings': (context) => const Settings(),
+        '/about': (context) => const About(),
+        '/win': (context) => const Win(),
+        '/tie': (context) => const Tie(),
+        '/end': (context) => const End(),
+        '/mystery': (context) => const Mystery(),
+      }));
 }
